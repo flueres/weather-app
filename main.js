@@ -10,6 +10,10 @@ function createWindow () {
         title: 'Weather App',
         width : 410,
         height : 470,
+        resizable: false,
+        titleBarStyle: 'hidden', // Removes the title bar
+        frame: false, // Removes the window frame
+        
 
     });
 
@@ -18,7 +22,18 @@ function createWindow () {
         protocol: 'file:',
     });
 
-    MainWindow.loadURL(startUrl);
+    MainWindow.loadURL(startUrl);   
 }
 
+app.on('web-contents-created', (event, contents) => {
+  contents.session.setPermissionRequestHandler((webContents, permission, callback) => {
+    if (permission === 'geolocation') {
+      callback(true); // Approve geolocation requests
+    } else {
+      callback(false);
+    }
+  });
+});
 app.whenReady().then(createWindow);
+
+
