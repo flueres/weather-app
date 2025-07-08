@@ -6,16 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dev:watch": "npx electronmon --tracewarnings ."
+    "dev:watch": "npx electronmon --tracewarnings .",
+    "dist": "electron-builder"
   },
-  "keywords": [
-    "electron",
-    "reactjs",
-    "typescript"
-  ],
-  "author": "Flueres",
-  "license": "MIT",
-  "dependencies": {
-    "electron": "^36.4.0"
+  "build":{
+    "appId": "com.flueres.weatherapp",
+    "productName": "cute DevilMayCry Weather widget",
+    "directories":{
+      "output": "dist"
+      },
+    "files": [
+      "**/*",
+      "!node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "icon.png"
+    }
+    }
   }
-}
+
